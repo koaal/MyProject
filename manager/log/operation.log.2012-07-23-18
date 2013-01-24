@@ -1,0 +1,1 @@
+2012-07-23 18:05:45,446 ["admin","CREATE","USER",[{"id":117272436372802,"name":"test","password":"4297f44b13955235245b2497399d7a93","confirmPassword":"123123","email":"admin@15.com","mobile":"13912345687","address":"阿士大夫","description":"asdf","role":"bizadmin","userPermissions":[],"tsPermissions":{},"edPermissions":{},"rePermissions":{}}]]

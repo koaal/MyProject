@@ -1,0 +1,1 @@
+2012-08-02 13:30:44,299 ["admin","CREATE","USER",[{"id":117357234776301,"name":"asdf","password":"96e79218965eb72c92a549dd5a330112","confirmPassword":"111111","email":"admin@15.com","mobile":"","address":"","description":"","role":"admin","userPermissions":[],"tsPermissions":{},"edPermissions":{},"rePermissions":{}}]]

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+
+	<taskdef name="dbunit" classname="org.dbunit.ant.DbUnitTask" />
+
+	<property file="build.properties" />
+
+	<target name="create-db">
+		<sql driver="${db.driver}" url="${db.root.url}" userid="${db.root.username}" password="${db.root.password}" src="${db.db.sql}" />
+	</target>
+
+	<target name="create-table">
+		<sql driver="${db.driver}" url="${db.url}" userid="${db.username}" password="${db.password}" src="${db.schema.sql}" />
+	</target>
+
+    <!-- 
+	<target name="install-test-data">
+		<dbunit driver="${db.driver}" url="${db.url}" userid="${db.username}" password="${db.password}">
+			<classpath>
+				<pathelement location="${jdbc.driver.jar}" />
+			</classpath>
+			<operation type="CLEAN_INSERT" src="${db.dbunit.data.folder}/sys_user.xml" />
+			<operation type="CLEAN_INSERT" src="${db.dbunit.data.folder}/test_data.xml" />
+		</dbunit>
+	</target>
+    -->
+	
+	<target name="install-user">
+		<dbunit driver="${db.driver}" url="${db.url}" userid="${db.username}" password="${db.password}">
+			<classpath>
+				<pathelement location="${jdbc.driver.jar}" />
+			</classpath>
+			<operation type="CLEAN_INSERT" src="${db.dbunit.data.folder}/sys_user.xml" />
+		</dbunit>
+	</target>
+
+	<target name="backup-db">
+		<tstamp>
+			<format property="backup.time" pattern="yyyy-MM-dd-hhmm" />
+		</tstamp>
+		<dbunit driver="${db.driver}" url="${db.url}" userid="${db.username}" password="${db.password}">
+			<classpath>
+				<pathelement location="${jdbc.driver.jar}" />
+			</classpath>
+			<export dest="export-${backup.time}.xml" encoding="UTF-8">
+				<table name="sys_user_permission" />
+				<table name="sys_user" />
+			</export>
+		</dbunit>
+	</target>
+</project>

@@ -1,0 +1,4 @@
+2012-07-26 11:17:08,194 INFO [org.apache.shiro.realm.AuthorizingRealm] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2012-07-26 11:23:57,654 INFO [org.apache.shiro.realm.AuthorizingRealm] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2012-07-26 11:24:35,992 INFO [org.apache.shiro.realm.AuthorizingRealm] - No cache or cacheManager properties have been set.  Authorization cache cannot be obtained.
+2012-07-26 11:24:45,913 INFO [com.abc.myproject.security.UserManagerRealm] - User: admin login.

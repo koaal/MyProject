@@ -1,0 +1,38 @@
+@CHARSET "UTF-8";
+
+#availableTable .ui-selecting { background: #FECA40; }
+#availableTable .ui-selected { background: #fff9b2; color: #000; }
+#availableTable { overflow: auto;height: 100%;list-style-type: none; margin: 0; padding: 0; width: 100%;border:0; }
+#availableTable li { margin: 0px; padding: 0.4em; font-size: 1em; height: 16px; }
+
+#selectedTable .ui-selecting { background: #FECA40; }
+#selectedTable .ui-selected { background: #ffd74c; color: #000; }
+#selectedTable { overflow: auto;height: 100%;list-style-type: none; margin: 0; padding: 0; width: 100%;border:2px; }
+#selectedTable li { margin: 0px; padding: 0.4em; font-size: 1em; height: 16px; text-align: left;}
+#selectedTable ul li { display:inline; }
+
+.selectedTableSpanText{
+	font-weight:normal;
+	font-family:Verdana, Geneva, sans-serif;
+	-moz-border-radius :10px;
+	float:left;
+	width:125px;
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+	overflow: hidden;
+}
+
+.radioDiv{
+	float:right;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-top:2px;
+}
+
+.overFlow{
+	width:125px;
+	white-space:nowrap; 
+	text-overflow:ellipsis; 
+	overflow: hidden;
+}
+

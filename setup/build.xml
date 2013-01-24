@@ -1,0 +1,166 @@
+<project>
+
+	<property file="build.properties" />
+	<property name="backup.folder" value="c:/backup" />
+	<property name="release.folder" value="./release" />
+
+	<macrodef name="maven">
+		<attribute name="options" default="" />
+		<attribute name="goal" />
+		<attribute name="basedir" />
+		<attribute name="resultproperty" default="maven.result" />
+		<element name="args" implicit="true" optional="true" />
+		<sequential>
+			<java classname="org.codehaus.classworlds.Launcher" fork="true" dir="@{basedir}" resultproperty="@{resultproperty}">
+				<jvmarg value="-Xmx512m" />
+				<classpath>
+					<fileset dir="${maven.home}/boot">
+						<include name="*.jar" />
+					</fileset>
+					<fileset dir="${maven.home}/lib">
+						<include name="*.jar" />
+					</fileset>
+				</classpath>
+				<sysproperty key="classworlds.conf" value="${maven.home}/bin/m2.conf" />
+				<sysproperty key="maven.home" value="${maven.home}" />
+				<arg line="--batch-mode @{options} @{goal}" />
+			</java>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="package-war">
+		<attribute name="target" />
+		<attribute name="project" />
+
+		<sequential>
+			<mkdir dir="builds/package/@{target}" />
+			<unzip src="builds/jetty/jetty.zip" dest="builds/package/@{target}" />
+			<copy todir="builds/package/@{target}" overwrite="true">
+				<fileset dir="builds/config/@{target}" />
+			</copy>
+			<unwar dest="builds/package/@{target}/webapp" src="${ws.folder}/@{project}/target/@{target}.war" />
+		</sequential>
+	</macrodef>
+
+	<macrodef name="mvn_install">
+		<attribute name="target" />
+		<sequential>
+			<exec dir="${ws.folder}/@{target}/" executable="cmd">
+				<arg value="/c mvn clean install -Dmaven.test.skip=true" />
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="mvn_package">
+		<attribute name="target" />
+		<sequential>
+			<exec dir="${ws.folder}/@{target}/" executable="cmd">
+				<arg value="/c mvn -U clean package -Dpackage.bin=true -Dmaven.test.skip=true" />
+			</exec>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="package-src">
+		<attribute name="fileName" />
+		<sequential>
+			<jar destfile="@{fileName}">
+				<fileset dir="../">
+					<exclude name="**/*.svn" />
+					<exclude name="**/*.bin" />
+					<exclude name="**/*.lock" />
+					<exclude name="**/*.prefs" />
+					<exclude name="**/*.git" />
+					<exclude name="**/*.jar" />
+					<exclude name="**/*.class" />
+					<exclude name="**/*.upload" />
+					<exclude name="**/*.log" />
+					<exclude name="**/target/**" />
+
+					<exclude name="**/logs/**" />
+					<exclude name="**/db/**" />
+					<exclude name="**/backup/**" />
+					<exclude name="**/release/**" />
+					<exclude name="**/tools/**" />
+					<exclude name="**/build/**" />
+					<exclude name="**/builds/package/**" />
+					<exclude name="**/.gradle/**" />
+					<exclude name="**/.git/**" />
+					<exclude name="**/.settings/**" />
+					<exclude name="**/setup-tools/doc/**" />
+					<exclude name="**/uploadfile/**" />
+					<exclude name="**/Viridian/bin**" />
+
+				</fileset>
+			</jar>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="package-doc">
+		<attribute name="fileName" />
+		<sequential>
+			<jar destfile="@{fileName}">
+				<fileset dir="../setup-tools/doc">
+					<include name="**/*.*" />
+				</fileset>
+			</jar>
+		</sequential>
+	</macrodef>
+
+	<macrodef name="run">
+		<attribute name="project" />
+		<attribute name="bat" />
+		<sequential>
+			<exec executable="cmd">
+				<arg value="/c" />
+				<arg value="${ws.folder}/@{project}/script/@{bat}" />
+				<arg value="-p" />
+			</exec>
+		</sequential>
+	</macrodef>
+
+
+	<target name="backup">
+		<tstamp>
+			<format property="backup.time" pattern="yyyy-MM-dd-hhmm" />
+		</tstamp>
+		<mkdir dir="${backup.folder}" />
+		<package-src fileName="${backup.folder}/myproject-${backup.time}-src.zip" />
+	</target>
+
+	<target name="package">
+		<maven basedir="../" goal="clean install package" />
+		<delete dir="builds/package" />
+		<mkdir dir="builds/package" />
+
+		<package-war target="manager" project="manager" />
+
+		</target>
+
+	<target name="quick-package">
+		<maven basedir="../" goal="clean install package -Dmaven.test.skip=true" />
+		<delete dir="builds/package" />
+		<mkdir dir="builds/package" />
+
+		<package-war target="manager" project="manager" />
+	</target>	
+	
+	<target name="release" depends="package">
+		<mkdir dir="${release.folder}" />
+		<tstamp>
+			<format property="release.time" pattern="yyyy-MM-dd-hhmm" />
+		</tstamp>
+
+		<jar destfile="${release.folder}/package-myproject-bin-${version.number}-${release.time}.zip" basedir="builds/package">
+		</jar>
+		<package-src fileName="${release.folder}/package-myproject-${version.number}-${release.time}-src.zip" />
+	</target>
+
+	<target name="add-route">
+		<exec executable="cmd">
+			<arg value="/c" />
+			<arg value="route add 10.0.9.0 mask 255.255.255.0 150.236.80.213" />
+			<arg value="-p" />
+		</exec>
+	</target>
+
+</project>

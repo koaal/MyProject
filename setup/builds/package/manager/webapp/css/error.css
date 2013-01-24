@@ -1,0 +1,119 @@
+body{
+	font-family:Arial, Helvetica, sans-serif;
+	background:#d6e3ef;
+	text-align: center;
+	}
+
+.whole_wrap{
+    height: 260px;
+    left: 50%;
+    margin-left: -148px;
+    margin-top: -100px;
+    overflow: hidden;
+    padding: 10px 20px;
+    position: absolute;
+    top: 50%;
+    width: 1000px;
+}
+
+.A_wrap_400{
+    background: url(Images/Error404.png) top right no-repeat #F2F9FF;
+    float: left;
+    height: 320px;
+    width: 55%;
+	min-width:300px;
+}
+
+.A_wrap_500{
+    background: url(Images/Error500.png) top right no-repeat #F2F9FF;
+    float: left;
+    height: 320px;
+    width: 55%;
+	min-width:300px;
+}
+
+.img{
+    float: left;
+    height: 229px;
+    left: 300px;
+    position: absolute;
+    top: 10px;
+    width: 278px;
+    z-index: 100;
+}
+
+.B_wrap{
+    background: none repeat scroll 0 0 #04ABD7;
+    float: left;
+    height: 190px;
+    overflow: hidden;
+    width: 260px;
+}
+
+.error_arrow {
+    float: left;
+    margin-left: -3px;
+    position: relative;
+    top: 58px;
+}
+.dialog_text{
+    color: #FFFFFF;
+    float: left;
+    font-size: 13px;
+    left: 34px;
+    position: relative;
+    top: 31px;
+    width: auto;
+}
+.errorname {
+    color: #FFFFFF;
+    font-family: TAhoma;
+    font-size: 2em;
+    left: -10px;
+    position: relative;
+    text-align: center;
+    top: 28px;
+}
+
+.errortext1 {
+	font-size: 1.6em;
+	color: #212e58;
+	font-style: normal;
+	text-transform: uppercase;
+	position:relative;
+	top:100px;
+	left:25px;
+}
+.errortext2 {
+    color: #212E58;
+    font-size: 1em;
+    font-style: normal;
+    left: 25px;
+    position: relative;
+    top: 95px;
+	text-transform:uppercase;
+}
+
+.error_left_text{
+    float: left;
+    min-height: 320px;
+    position: relative;
+    top: -40px;
+    z-index: 999;
+	margin: 0px 12px;
+}
+
+p{
+	margin-button:0px;
+	line-height:0.8em;
+	}
+
+a {
+	font-size: 1em;
+	color:#0066b3;
+}
+
+br {
+	line-height:0.3em;
+}
+	
